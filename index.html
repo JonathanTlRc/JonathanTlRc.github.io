@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    const url = "https://pokeapi.co/api/v2/pokemon/"
+    const pokemons = [];
 
-  </head>
-  <body>
-    <h1>Web de pruebas</h1>
-    <p>Hola Mundo</p>
-  </body>
+    for(i = 1; i<=151; i++){
+        pokemons[i] = pedirJSON(url + "" + i);
+    }
+
+    function pedirJSON(url, ok, noOk) {
+      const xhr = new XMLHttpRequest();
+
+      xhr.addEventListener("readystatechange", e => {
+        if (xhr.readyState !== 4) return;
+
+        if (xhr.status >= 200 && xhr.status < 300) {
+          guardarDato(JSON.parse(xhr.responseText));
+        } else {
+          noOk(`Error: ${xhr.status} -> ${xhr.statusText}.`);
+        }
+      });
+
+      xhr.open("GET", URL);
+      xhr.send();
+    }
+
+    function guardarDato(objeto) {
+        return pokemon = {
+            nombre : objeto.name ,
+            num_pokedex : ojeto.id,
+            tipo1 : objeto.types[0],
+            tipo2 : objeto.types[1],
+            habilidad1 : objeto.abilities[0],
+            habilidad2 : objeto.abilities[1],
+            habilidadOculta : objeto.abilities[2]
+        }
+    }
+
+    </script>
+</body>
 </html>
